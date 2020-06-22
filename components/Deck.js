@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { Text, StyleSheet, View } from 'react-native'
 
 const styles = StyleSheet.create({
   deck: {
@@ -27,9 +27,9 @@ const styles = StyleSheet.create({
 
 export default function ({ name, numberOfCards }) {
   return (
-    <TouchableOpacity style={styles.deck} activeOpacity={.85}>
+    <View style={styles.deck}>
       <Text style={styles.name} ellipsizeMode='tail' numberOfLines={1}>{name}</Text>
       <Text style={styles.number}>{numberOfCards}</Text>
-    </TouchableOpacity>
+    </View>
   )
 }
