@@ -12,7 +12,7 @@ import DeckDetailScreen from './components/DeckDetailScreen'
 const Stack = createStackNavigator()
 
 function MainNavigator() {
-  const addIconNma = Platform.OS === 'ios'
+  const addIconName = Platform.OS === 'ios'
     ? 'ios-add'
     : 'md-add'
 
@@ -26,7 +26,7 @@ function MainNavigator() {
           options={() => ({
             headerRight: props => (
               <TouchableOpacity>
-                <Ionicons name={addIconNma} size={24} color='black' style={{ marginRight: 24 }} {...props} />
+                <Ionicons name={addIconName} size={24} color='black' style={{ marginRight: 24 }} {...props} />
               </TouchableOpacity>
             ),
           })}
