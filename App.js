@@ -5,17 +5,26 @@ import { Provider } from 'react-redux'
 import reducer from './state/reducers'
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
-import DecksScreen from './components/DecksScreen'
 import { Ionicons } from '@expo/vector-icons'
+import DecksScreen from './components/DecksScreen'
 import DeckDetailScreen from './components/DeckDetailScreen'
+import AddCardToDeckScreen from './components/AddCardToDeckScreen'
 
 const Stack = createStackNavigator()
 
-function MainNavigator() {
+function ToolbarAddButton(props) {
   const addIconName = Platform.OS === 'ios'
     ? 'ios-add'
     : 'md-add'
 
+  return (
+    <TouchableOpacity>
+      <Ionicons name={addIconName} size={24} color='black' style={{ marginRight: 24 }} {...props} />
+    </TouchableOpacity>
+  )
+}
+
+const MainNavigator = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator>
@@ -24,17 +33,23 @@ function MainNavigator() {
           name='Decks'
           component={DecksScreen}
           options={() => ({
-            headerRight: props => (
-              <TouchableOpacity>
-                <Ionicons name={addIconName} size={24} color='black' style={{ marginRight: 24 }} {...props} />
-              </TouchableOpacity>
-            ),
+            headerRight: props => <ToolbarAddButton {...props} />,
           })}
+        />
+
+        <Stack.Screen
+          name='AddCardToDeck'
+          component={AddCardToDeckScreen}
         />
 
         <Stack.Screen
           name='DeckDetail'
           component={DeckDetailScreen}
+          options={({ route, navigation }) => ({
+            headerRight: props => <ToolbarAddButton onPress={() => navigation.push('AddCardToDeck', {
+              deckName: route.params.deckName
+            })} {...props} />,
+          })}
         />
 
       </Stack.Navigator>

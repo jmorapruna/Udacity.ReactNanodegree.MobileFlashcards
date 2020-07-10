@@ -7,8 +7,8 @@ function DeckDetailScreen({ deck, navigation }) {
   useLayoutEffect(() => {
     navigation.setOptions({
       title: deck.name
-    });
-  }, [navigation, deck]);
+    })
+  }, [navigation, deck])
 
   return (
     <View>
