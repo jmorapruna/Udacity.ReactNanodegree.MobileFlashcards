@@ -1,9 +1,14 @@
-import React, { useLayoutEffect, useState, useCallback } from 'react'
+import React, { useLayoutEffect, useState, useCallback, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { View, Text } from 'react-native'
 import AppButton from './AppButton'
+import { clearLocalNotificationAsync, setLocalNotificationAsync } from '../notifications/NotificationsService'
 
 function QuizScreen({ deck, navigation }) {
+  useEffect(() => {
+    clearLocalNotificationAsync().then(setLocalNotificationAsync)
+  }, [])
+
   useLayoutEffect(() => {
     navigation.setOptions({
       title: deck.name

@@ -12,6 +12,8 @@ import AddCardToDeckScreen from './AddCardToDeckScreen'
 import QuizScreen from './QuizScreen'
 import { loadAllDecks } from '../state/actions/decks'
 
+import { setLocalNotificationAsync } from '../notifications/NotificationsService'
+
 function AddButton({ onPress, ...props }) {
   const addIconName = Platform.OS === 'ios'
     ? 'ios-add'
@@ -32,6 +34,7 @@ class RootComponent extends Component {
   componentDidMount() {
     const { dispatch } = this.props
     dispatch(loadAllDecks())
+    setLocalNotificationAsync().then()
   }
 
   render() {
