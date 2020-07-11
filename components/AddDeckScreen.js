@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from 'react'
-import { useDispatch } from 'react-redux'
-import {addDeck} from '../state/actions/decks'
+import { connect } from 'react-redux'
+import { addDeck } from '../state/actions/decks'
 import { View, Text, TextInput, StyleSheet } from 'react-native'
 import AppButton from './AppButton'
 
@@ -8,21 +8,22 @@ const styles = StyleSheet.create({
 
 })
 
-function AddDeckScreen({ navigation }) {
-  const dispatch = useDispatch()
-
+function AddDeckScreen({ decks, navigation, dispatch }) {
   const [newDeckName, setNewDeckName] = useState('')
   const [showMissingDeckNameError, setShowMissingDeckNameError] = useState(false)
+  const [showDeckNameAlreadyUsedError, setShowDeckNameAlreadyUsedError] = useState(false)
 
   const handleAddDeckPressed = useCallback(() => {
-    if (newDeckName.trim().length > 0) {
-      setShowMissingDeckNameError(false)
+    const nameIsMissing = newDeckName.trim().length === 0
+    const deckNameAlreadyUsed = !!decks[newDeckName]
+
+    setShowMissingDeckNameError(nameIsMissing)
+    setShowDeckNameAlreadyUsedError(deckNameAlreadyUsed)
+
+    if (!nameIsMissing && !deckNameAlreadyUsed) {
       dispatch(addDeck(newDeckName))
       navigation.pop()
-    } else {
-      setShowMissingDeckNameError(true)
     }
-
   }, [newDeckName])
 
   return (
@@ -33,9 +34,8 @@ function AddDeckScreen({ navigation }) {
         value={newDeckName}
         onChangeText={text => setNewDeckName(text)} />
 
-      {
-        showMissingDeckNameError && <Text>The name is required</Text>
-      }
+      {showMissingDeckNameError && <Text>The name is required</Text>}
+      {showDeckNameAlreadyUsedError && <Text>This deck name is already used. Choose another one.</Text>}
 
       <AppButton
         text='Add deck'
@@ -44,4 +44,10 @@ function AddDeckScreen({ navigation }) {
   )
 }
 
-export default AddDeckScreen
+function mapStateToProps({ decks }) {
+  return {
+    decks
+  }
+}
+
+export default connect(mapStateToProps)(AddDeckScreen)
