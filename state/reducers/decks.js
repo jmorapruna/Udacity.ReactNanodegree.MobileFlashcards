@@ -1,12 +1,21 @@
-import { ADD_DECK, ADD_CARD_TO_DECK, DELETE_DECK } from '../actions/decks'
+import {
+  LOAD_ALL_DECKS_SUCCESS,
+  ADD_DECK,
+  ADD_CARD_TO_DECK,
+  DELETE_DECK
+} from '../actions/decks'
 
-export default function decks(state = {
-  'React': { name: 'React', questions: [{ question: 'q1', answer: 'a1' }, { question: 'q2', answer: 'a2' }] },
-  'Javascript': { name: 'Javascript', questions: [{ question: 'q3', answer: 'a3' }] },
-  'Udacity': { name: 'Udacity', questions: [] },
-}, action) {
+export default function decks(state = {}, action) {
 
   switch (action.type) {
+    case LOAD_ALL_DECKS_SUCCESS: {
+      const { decks } = action
+
+      return {
+        ...decks
+      }
+    }
+
     case ADD_DECK: {
       const { deckName } = action
 
