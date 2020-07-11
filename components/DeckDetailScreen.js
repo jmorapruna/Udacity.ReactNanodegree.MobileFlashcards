@@ -1,8 +1,8 @@
-import React, { useLayoutEffect } from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import React, { useLayoutEffect, useState } from 'react'
+import { View, Text, TouchableWithoutFeedback, StyleSheet } from 'react-native'
 import { connect } from 'react-redux'
 import AppButton from '../components/AppButton'
-
+import ConfirmDeleteDeckModal from '../components/ConfirmDeleteDeckModal'
 
 const styles = StyleSheet.create({
   deckName: {
@@ -13,10 +13,14 @@ const styles = StyleSheet.create({
   },
   addCardsFirst: {
     textAlign: 'center',
-  }
+  },
 })
 
 function DeckDetailScreen({ deck, navigation }) {
+
+  const [isDeleteModelVisible, setIsDeleteModelVisible] = useState(false)
+  const numberOfQuestions = deck.questions.length
+  const anyQuestiobns = numberOfQuestions > 0
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -24,11 +28,12 @@ function DeckDetailScreen({ deck, navigation }) {
     })
   }, [navigation, deck])
 
-  const numberOfQuestions = deck.questions.length
-  const anyQuestiobns = numberOfQuestions > 0
-
   return (
     <View>
+      <ConfirmDeleteDeckModal
+        isVisible={isDeleteModelVisible}
+        setIsVisible={setIsDeleteModelVisible} />
+
       <Text style={styles.deckName}>{deck.name}</Text>
 
       {
@@ -45,6 +50,10 @@ function DeckDetailScreen({ deck, navigation }) {
       {
         !anyQuestiobns && <Text style={styles.addCardsFirst}>To start a quiz, add some cards first</Text>
       }
+
+      <TouchableWithoutFeedback onPress={() => setIsDeleteModelVisible(true)}>
+        <Text>Delete card</Text>
+      </TouchableWithoutFeedback>
 
     </View>
   )
