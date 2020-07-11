@@ -1,6 +1,20 @@
 import React, { useLayoutEffect } from 'react'
-import { View, Text } from 'react-native'
+import { View, Text, StyleSheet } from 'react-native'
 import { connect } from 'react-redux'
+import AppButton from '../components/AppButton'
+
+
+const styles = StyleSheet.create({
+  deckName: {
+    textAlign: 'center',
+  },
+  numberOfCards: {
+    textAlign: 'center',
+  },
+  addCardsFirst: {
+    textAlign: 'center',
+  }
+})
 
 function DeckDetailScreen({ deck, navigation }) {
 
@@ -10,9 +24,27 @@ function DeckDetailScreen({ deck, navigation }) {
     })
   }, [navigation, deck])
 
+  const numberOfQuestions = deck.questions.length
+  const anyQuestiobns = numberOfQuestions > 0
+
   return (
     <View>
-      <Text>Detail of {deck.name}</Text>
+      <Text style={styles.deckName}>{deck.name}</Text>
+      <Text style={styles.numberOfCards}>{numberOfQuestions} cards</Text>
+      
+      <AppButton
+        text='Add card'
+        onPress={() => { }} />
+
+      <AppButton
+        text='Start quiz'
+        onPress={() => { }}
+        disabled={!anyQuestiobns} />
+
+      {
+        !anyQuestiobns && <Text style={styles.addCardsFirst}>To start a quiz, add some cards first</Text>
+      }
+
     </View>
   )
 }
