@@ -34,6 +34,14 @@ function DeckDetailScreen({ deck, navigation }) {
     })
   }, [navigation, deck])
 
+  let cardsText
+  if (numberOfQuestions === 0)
+    cardsText = 'No cards'
+  else if (numberOfQuestions === 1)
+    cardsText = '1 card'
+  else
+    cardsText = `${numberOfQuestions} cards`
+
   return (
     <View>
       <ConfirmDeleteDeckModal
@@ -44,11 +52,7 @@ function DeckDetailScreen({ deck, navigation }) {
 
       <Text style={styles.deckName}>{deck.name}</Text>
 
-      {
-        anyQuestiobns
-          ? <Text style={styles.numberOfCards}>{numberOfQuestions} cards</Text>
-          : <Text style={styles.numberOfCards}>No cards</Text>
-      }
+      <Text style={styles.numberOfCards}>{cardsText}</Text>
 
       <AppButton
         text='Start quiz'
