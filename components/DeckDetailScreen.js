@@ -30,11 +30,12 @@ function DeckDetailScreen({ deck, navigation }) {
   return (
     <View>
       <Text style={styles.deckName}>{deck.name}</Text>
-      <Text style={styles.numberOfCards}>{numberOfQuestions} cards</Text>
-      
-      <AppButton
-        text='Add card'
-        onPress={() => { }} />
+
+      {
+        anyQuestiobns
+          ? <Text style={styles.numberOfCards}>{numberOfQuestions} cards</Text>
+          : <Text style={styles.numberOfCards}>No cards</Text>
+      }
 
       <AppButton
         text='Start quiz'
