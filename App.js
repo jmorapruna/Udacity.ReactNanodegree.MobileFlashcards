@@ -7,6 +7,7 @@ import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import { Ionicons } from '@expo/vector-icons'
 import DecksScreen from './components/DecksScreen'
+import AddDeckScreen from './components/AddDeckScreen'
 import DeckDetailScreen from './components/DeckDetailScreen'
 import AddCardToDeckScreen from './components/AddCardToDeckScreen'
 
@@ -32,9 +33,20 @@ const MainNavigator = () => {
         <Stack.Screen
           name='Decks'
           component={DecksScreen}
-          options={() => ({
-            headerRight: props => <ToolbarAddButton {...props} />,
+          options={({ navigation }) => ({
+            headerRight: () => (
+              <ToolbarAddButton
+                onPress={() => navigation.push('AddDeck')} />
+            )
           })}
+        />
+
+        <Stack.Screen
+          name='AddDeck'
+          component={AddDeckScreen}
+          options={{
+            title: 'Add a deck'
+          }}
         />
 
         <Stack.Screen
@@ -46,9 +58,12 @@ const MainNavigator = () => {
           name='DeckDetail'
           component={DeckDetailScreen}
           options={({ route, navigation }) => ({
-            headerRight: props => <ToolbarAddButton onPress={() => navigation.push('AddCardToDeck', {
-              deckName: route.params.deckName
-            })} {...props} />,
+            headerRight: () => (
+              <ToolbarAddButton
+                onPress={() => navigation.push('AddCardToDeck', {
+                  deckName: route.params.deckName
+                })} />
+            )
           })}
         />
 
