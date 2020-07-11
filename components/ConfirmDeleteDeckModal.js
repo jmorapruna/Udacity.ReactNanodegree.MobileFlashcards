@@ -63,6 +63,7 @@ function ConfirmDeleteDeckModal({ deckName, isVisible, setIsVisible, popScreen }
       animationType='slide'
       transparent={true}
       visible={isVisible}
+      onRequestClose={() => setIsVisible(false)}
     >
       <View style={styles.centeredView}>
         <View style={styles.modalView}>
