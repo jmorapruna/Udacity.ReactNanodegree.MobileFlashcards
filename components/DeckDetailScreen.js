@@ -56,7 +56,7 @@ function DeckDetailScreen({ deck, navigation }) {
 
       <AppButton
         text='Start quiz'
-        onPress={() => { }}
+        onPress={() => navigation.push('Quiz', { deckName: deck.name })}
         disabled={!anyQuestiobns} />
 
       {

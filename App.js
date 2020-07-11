@@ -11,6 +11,7 @@ import DecksScreen from './components/DecksScreen'
 import AddDeckScreen from './components/AddDeckScreen'
 import DeckDetailScreen from './components/DeckDetailScreen'
 import AddCardToDeckScreen from './components/AddCardToDeckScreen'
+import QuizScreen from './components/QuizScreen'
 
 const Stack = createStackNavigator()
 
@@ -69,6 +70,11 @@ const MainNavigator = () => {
               />
             )
           })}
+        />
+
+        <Stack.Screen
+          name='Quiz'
+          component={QuizScreen}
         />
 
       </Stack.Navigator>
