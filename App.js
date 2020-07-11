@@ -6,6 +6,7 @@ import reducer from './state/reducers'
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import { Ionicons } from '@expo/vector-icons'
+import { withPreventDoubleClick } from './components/withPreventDoubleClick'
 import DecksScreen from './components/DecksScreen'
 import AddDeckScreen from './components/AddDeckScreen'
 import DeckDetailScreen from './components/DeckDetailScreen'
@@ -13,17 +14,19 @@ import AddCardToDeckScreen from './components/AddCardToDeckScreen'
 
 const Stack = createStackNavigator()
 
-function ToolbarAddButton(props) {
+function AddButton({ onPress, ...props }) {
   const addIconName = Platform.OS === 'ios'
     ? 'ios-add'
     : 'md-add'
 
   return (
-    <TouchableOpacity>
+    <TouchableOpacity onPress={onPress} onLongPress={onPress}>
       <Ionicons name={addIconName} size={24} color='black' style={{ marginRight: 24 }} {...props} />
     </TouchableOpacity>
   )
 }
+
+const AddButtonWithDoubleClickFix = withPreventDoubleClick(AddButton)
 
 const MainNavigator = () => {
   return (
@@ -35,7 +38,7 @@ const MainNavigator = () => {
           component={DecksScreen}
           options={({ navigation }) => ({
             headerRight: () => (
-              <ToolbarAddButton
+              <AddButtonWithDoubleClickFix
                 onPress={() => navigation.push('AddDeck')} />
             )
           })}
@@ -59,17 +62,18 @@ const MainNavigator = () => {
           component={DeckDetailScreen}
           options={({ route, navigation }) => ({
             headerRight: () => (
-              <ToolbarAddButton
+              <AddButtonWithDoubleClickFix
                 onPress={() => navigation.push('AddCardToDeck', {
                   deckName: route.params.deckName
-                })} />
+                })}
+              />
             )
           })}
         />
 
       </Stack.Navigator>
     </NavigationContainer>
-  )
+  );
 }
 
 function App() {
