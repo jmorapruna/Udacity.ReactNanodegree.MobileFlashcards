@@ -3,13 +3,13 @@ import AsyncStorage from '@react-native-community/async-storage'
 const DECKS_KEY = 'DECKS'
 
 export const getAllDecks = async () => {
-  debugger
-  const decks = {}
+  let decks = {}
 
   try {
-    decks = await AsyncStorage.getItem(DECKS_KEY)
+    decksString = await AsyncStorage.getItem(DECKS_KEY)
+    decks = JSON.parse(decksString)
   } catch (e) {
-    console.error(e)
+    console.error('StorageAdapter - getAllDecks', e)
   }
 
   return decks
@@ -26,11 +26,11 @@ export const addEmptyDeck = async (deckName) => {
         questions: []
       }
     }
-
+    
     const value = JSON.stringify(newDecks)
     await AsyncStorage.setItem(DECKS_KEY, value)
   } catch (e) {
-    console.error(e)
+    console.error('StorageAdapter - addEmptyDeck', e)
   }
 }
 
@@ -57,7 +57,7 @@ export const addCardToDeck = async (deckName, question, answer) => {
     const value = JSON.stringify(newDecks)
     await AsyncStorage.setItem(DECKS_KEY, value)
   } catch (e) {
-    console.error(e)
+    console.error('StorageAdapter - addCardToDeck', e)
   }
 }
 
@@ -66,13 +66,13 @@ export const deleteDeck = async (deckName) => {
     const decks = await getAllDecks()
 
     const {
-      ...newDecks,
-      [deckName]: deleteDeck
+      [deckName]: deleteDeck,
+      ...newDecks
     } = decks
 
     const value = JSON.stringify(newDecks)
     await AsyncStorage.setItem(DECKS_KEY, value)
   } catch (e) {
-    console.error(e)
+    console.error('StorageAdapter - deleteDeck', e)
   }
 }
