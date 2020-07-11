@@ -1,5 +1,6 @@
 import React, { useCallback } from 'react'
 import { useDispatch } from 'react-redux'
+import { deleteDeck } from '../state/actions/decks'
 
 import {
   Modal,
@@ -48,12 +49,14 @@ const styles = StyleSheet.create({
   }
 })
 
-function ConfirmDeleteDeckModal({ deckName, isVisible, setIsVisible }) {
+function ConfirmDeleteDeckModal({ deckName, isVisible, setIsVisible, popScreen }) {
   const dispatch = useDispatch()
+
   const handleConfirmDeletePressed = useCallback(() => {
-    //dispatch()
-    setIsVisible(!isVisible)
-  }, [isVisible, setIsVisible, dispatch])
+    setIsVisible(false)
+    popScreen()
+    dispatch(deleteDeck(deckName))
+  }, [isVisible, setIsVisible])
 
   return (
     <Modal

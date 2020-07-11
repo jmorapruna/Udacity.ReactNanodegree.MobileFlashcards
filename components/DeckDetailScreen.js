@@ -14,9 +14,15 @@ const styles = StyleSheet.create({
   addCardsFirst: {
     textAlign: 'center',
   },
+  deleteDeck: {
+    textAlign: 'center',
+  }
 })
 
 function DeckDetailScreen({ deck, navigation }) {
+
+  if (!deck)
+    return <></>
 
   const [isDeleteModelVisible, setIsDeleteModelVisible] = useState(false)
   const numberOfQuestions = deck.questions.length
@@ -31,8 +37,10 @@ function DeckDetailScreen({ deck, navigation }) {
   return (
     <View>
       <ConfirmDeleteDeckModal
+        deckName={deck.name}
         isVisible={isDeleteModelVisible}
-        setIsVisible={setIsDeleteModelVisible} />
+        setIsVisible={setIsDeleteModelVisible}
+        popScreen={() => navigation.pop()} />
 
       <Text style={styles.deckName}>{deck.name}</Text>
 
@@ -52,7 +60,7 @@ function DeckDetailScreen({ deck, navigation }) {
       }
 
       <TouchableWithoutFeedback onPress={() => setIsDeleteModelVisible(true)}>
-        <Text>Delete card</Text>
+        <Text style={styles.deleteDeck}>Delete deck</Text>
       </TouchableWithoutFeedback>
 
     </View>
