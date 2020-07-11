@@ -1,4 +1,4 @@
-import { ADD_CARD_TO_DECK, DELETE_DECK } from '../actions/decks'
+import { ADD_DECK, ADD_CARD_TO_DECK, DELETE_DECK } from '../actions/decks'
 
 export default function decks(state = {
   'React': { name: 'React', questions: [{ question: 'q1', answer: 'a1' }, { question: 'q2', answer: 'a2' }] },
@@ -7,6 +7,18 @@ export default function decks(state = {
 }, action) {
 
   switch (action.type) {
+    case ADD_DECK: {
+      const { deckName } = action
+
+      return {
+        ...state,
+        [deckName]: {
+          name: deckName,
+          questions: []
+        }
+      }
+    }
+
     case ADD_CARD_TO_DECK: {
       const { deckName, question, answer } = action
 
