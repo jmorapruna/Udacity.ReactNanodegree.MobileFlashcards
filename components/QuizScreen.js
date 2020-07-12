@@ -10,6 +10,7 @@ const styles = StyleSheet.create({
   },
   progressIndicator: {
     textAlign: 'center',
+    alignSelf: 'center',
     fontSize: 18,
     marginTop: 40,
     marginBottom: 60,
@@ -18,23 +19,28 @@ const styles = StyleSheet.create({
   },
   questionText: {
     textAlign: 'center',
+    alignSelf: 'center',
     fontSize: 20,
+    width: 350,
     fontWeight: '700'
   },
   correctAnswerText: {
     textAlign: 'center',
-    fontSize: 18,
     alignSelf: 'center',
+    fontSize: 18,
     marginVertical: 30
   },
   answerText: {
     textAlign: 'center',
+    alignSelf: 'center',
     fontSize: 20,
+    width: 350,
     fontWeight: '700',
   },
 
   didAnswerCorrectly: {
     textAlign: 'center',
+    alignSelf: 'center',
     fontSize: 18,
     marginBottom: 10
   },
