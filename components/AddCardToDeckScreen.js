@@ -1,7 +1,8 @@
 import React, { useState, useLayoutEffect, useCallback } from 'react'
 import { connect } from 'react-redux'
-import { View, Text, TextInput, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet } from 'react-native'
 import AppButton from '../components/AppButton'
+import AppTextInput from '../components/AppTextInput'
 import { addCardToDeck } from '../state/actions/decks'
 
 const styles = StyleSheet.create({
@@ -39,10 +40,10 @@ function AddCardToDeckScreen({ route, navigation, dispatch }) {
       <Text>Add a card</Text>
 
       <Text>Question</Text>
-      <TextInput value={questionText} onChangeText={text => setQuestionText(text)} />
+      <AppTextInput value={questionText} onChangeText={text => setQuestionText(text)} />
 
       <Text>Answer</Text>
-      <TextInput value={answerText} onChangeText={text => setAnswerText(text)} />
+      <AppTextInput value={answerText} onChangeText={text => setAnswerText(text)} />
 
       {
         showMissingFieldError && (

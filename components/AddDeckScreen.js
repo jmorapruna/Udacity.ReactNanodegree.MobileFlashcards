@@ -1,8 +1,9 @@
 import React, { useState, useCallback } from 'react'
 import { connect } from 'react-redux'
 import { addDeck } from '../state/actions/decks'
-import { View, Text, TextInput, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet } from 'react-native'
 import AppButton from './AppButton'
+import AppTextInput from './AppTextInput'
 
 const styles = StyleSheet.create({
 
@@ -30,7 +31,7 @@ function AddDeckScreen({ decks, navigation, dispatch }) {
     <View>
       <Text>Name of the deck</Text>
 
-      <TextInput
+      <AppTextInput
         value={newDeckName}
         onChangeText={text => setNewDeckName(text)} />
 
