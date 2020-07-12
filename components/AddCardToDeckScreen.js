@@ -6,10 +6,37 @@ import AppTextInput from '../components/AppTextInput'
 import { addCardToDeck } from '../state/actions/decks'
 
 const styles = StyleSheet.create({
+  screen: {
+    flex: 1,
+    justifyContent: 'space-evenly',
+  },
+  title: {
+    textAlign: 'center',
+    fontSize: 20,
+    marginBottom: 30,
+    fontWeight: '700'
+  },
+  inputs: {
+    width: 280,
+    alignSelf: 'center'
+  },
+  label: {
+    fontSize: 16,
+    fontWeight: '700',
+    marginBottom: 4,
+    marginStart: 2
+  },
+  field: {
+    marginVertical: 10
+  },
   missingData: {
     alignSelf: 'center',
     textAlign: 'center',
     maxWidth: 280,
+    fontSize: 15,
+    marginTop: 10,
+    color: '#d32b39',
+    fontWeight: '700'
   }
 })
 
@@ -36,20 +63,28 @@ function AddCardToDeckScreen({ route, navigation, dispatch }) {
   }, [deckName, questionText, answerText])
 
   return (
-    <View>
-      <Text>Add a card</Text>
+    <View style={styles.screen}>
 
-      <Text>Question</Text>
-      <AppTextInput value={questionText} onChangeText={text => setQuestionText(text)} />
+      <View style={styles.inputs}>
 
-      <Text>Answer</Text>
-      <AppTextInput value={answerText} onChangeText={text => setAnswerText(text)} />
+        <Text style={styles.title}>Add a card to the deck:</Text>
 
-      {
-        showMissingFieldError && (
-          <Text style={styles.missingData}>To add a card, first fill the required question and answer</Text>
-        )
-      }
+        <View style={styles.field}>
+          <Text style={styles.label}>Question</Text>
+          <AppTextInput value={questionText} onChangeText={text => setQuestionText(text)} multiline={true} />
+        </View>
+
+        <View style={styles.field}>
+          <Text style={styles.label}>Answer</Text>
+          <AppTextInput value={answerText} onChangeText={text => setAnswerText(text)} multiline={true} />
+        </View>
+
+        {
+          showMissingFieldError && (
+            <Text style={styles.missingData}>To add a card, first fill the required question and answer.</Text>
+          )
+        }
+      </View>
 
       <AppButton
         text='Add card'
