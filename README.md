@@ -10,6 +10,8 @@ As we've seen in the course, this approach provides better performance and less 
   
 This time I've added [redux-observable](https://redux-observable.js.org/) to explore other Redux middlewares than [Redux Thunk](https://github.com/reduxjs/redux-thunk).
 
+> **Note:** No platform-specific APIs have been used in development (Android / iOS), but this app has only been tested using an Android device. 
+
 ## Functional description
 
 This is a mobile app that people can use to study before exams.
