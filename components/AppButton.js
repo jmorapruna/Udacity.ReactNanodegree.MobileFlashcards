@@ -10,9 +10,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignSelf: 'center'
   },
-  disabled: {
-    backgroundColor: '#ccc',
-  },
   text: {
     color: '#fff',
     textAlign: 'center',
@@ -24,7 +21,10 @@ const styles = StyleSheet.create({
   },
   dangerColor: {
     backgroundColor: '#d32b39'
-  }
+  },
+  disabledColor: {
+    backgroundColor: '#ccc',
+  },
 })
 
 function AppButton({
@@ -33,9 +33,14 @@ function AppButton({
   disabled = false,
   colorCode = 'primary'
 }) {
-  let colorStyle = colorCode === 'primary'
-    ? styles.primaryColor
-    : styles.dangerColor
+  let colorStyle
+
+  if (disabled)
+    colorStyle = styles.disabledColor
+  else if (colorCode === 'primary')
+    colorStyle = styles.primaryColor
+  else
+    colorStyle = styles.dangerColor
 
   return (
     <TouchableOpacity
