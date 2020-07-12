@@ -44,6 +44,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
   deckName: {
+    fontSize: 16,
     marginTop: 20,
     marginBottom: 15,
   }
@@ -68,7 +69,7 @@ function ConfirmDeleteDeckModal({ deckName, isVisible, setIsVisible, popScreen }
       <View style={styles.centeredView}>
         <View style={styles.modalView}>
           <Text style={[styles.centerText, styles.title]}>Are you sure?</Text>
-          <Text style={[styles.centerText, styles.subTitle]}>The following card will be deleted:</Text>
+          <Text style={[styles.centerText, styles.subTitle]}>The following deck will be deleted:</Text>
           <Text style={[styles.centerText, styles.deckName]}>{deckName}</Text>
 
           <AppButton
