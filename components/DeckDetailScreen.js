@@ -16,7 +16,8 @@ const styles = StyleSheet.create({
   deckName: {
     fontSize: 30,
     maxWidth: 340,
-    marginBottom: 40
+    marginBottom: 40,
+    fontWeight: '700'
   },
   numberOfCards: {
     fontSize: 18
@@ -73,7 +74,7 @@ function DeckDetailScreen({ deck, navigation }) {
           onPress={() => navigation.push('Quiz', { deckName: deck.name })}
           disabled={!anyQuestiobns} />
         {
-          !anyQuestiobns && <Text style={[styles.centerText, styles.addCardsFirst]}>To start a quiz, add some cards first</Text>
+          !anyQuestiobns && <Text style={[styles.centerText, styles.addCardsFirst]}>To start a quiz, add some cards first.</Text>
         }
       </View>
 
