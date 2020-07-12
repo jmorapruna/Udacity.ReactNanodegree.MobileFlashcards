@@ -112,7 +112,7 @@ function QuizScreen({ deck, navigation }) {
     return (
       <View style={styles.quizPage}>
 
-        <Text style={styles.progressIndicator}>The question {questionIndex + 1} /{deck.questions.length}</Text>
+        <Text style={styles.progressIndicator}>Question {questionIndex + 1} / {deck.questions.length}</Text>
         <Text style={styles.questionText}>{question.question}</Text>
 
         {
