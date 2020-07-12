@@ -45,7 +45,7 @@ function AddDeckScreen({ decks, navigation, dispatch }) {
 
     if (!nameIsMissing && !deckNameAlreadyUsed) {
       dispatch(addDeck(newDeckName))
-      navigation.pop()
+      navigation.replace('DeckDetail', { deckName: newDeckName })
     }
   }, [newDeckName])
 
