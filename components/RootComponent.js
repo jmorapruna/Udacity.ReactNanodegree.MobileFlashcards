@@ -11,7 +11,6 @@ import DeckDetailScreen from './DeckDetailScreen'
 import AddCardToDeckScreen from './AddCardToDeckScreen'
 import QuizScreen from './QuizScreen'
 import { loadAllDecks } from '../state/actions/decks'
-
 import { setLocalNotificationAsync } from '../notifications/NotificationsService'
 
 function AddButton({ onPress, ...props }) {
@@ -21,7 +20,7 @@ function AddButton({ onPress, ...props }) {
 
   return (
     <TouchableOpacity onPress={onPress} onLongPress={onPress}>
-      <Ionicons name={addIconName} size={24} color='black' style={{ marginRight: 24 }} {...props} />
+      <Ionicons name={addIconName} size={28} color='black' style={{ marginRight: 24 }} {...props} />
     </TouchableOpacity>
   )
 }
@@ -46,6 +45,7 @@ class RootComponent extends Component {
             name='Decks'
             component={DecksScreen}
             options={({ navigation }) => ({
+              title: 'Mobile Flashcards',
               headerRight: () => (
                 <AddButtonWithDoubleClickFix
                   onPress={() => navigation.push('AddDeck')} />

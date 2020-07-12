@@ -5,7 +5,7 @@ const styles = StyleSheet.create({
   deck: {
     minHeight: 120,
     justifyContent: 'center',
-    backgroundColor: 'black',
+    backgroundColor: '#2cbff4',
     borderRadius: 10,
     marginHorizontal: 8,
     marginTop: 8,
@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
   },
   number: {
     color: 'white',
-    fontSize: 20,
+    fontSize: 26,
     textAlign: 'center',
   }
 })
