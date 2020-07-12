@@ -1,12 +1,12 @@
 import React, { useCallback } from 'react'
 import { useDispatch } from 'react-redux'
 import { deleteDeck } from '../state/actions/decks'
+import AppButton from './AppButton'
 
 import {
   Modal,
   StyleSheet,
   Text,
-  TouchableHighlight,
   View
 } from 'react-native'
 
@@ -15,13 +15,14 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 22
   },
   modalView: {
     margin: 20,
     backgroundColor: 'white',
-    borderRadius: 20,
-    padding: 35,
+    borderRadius: 10,
+    paddingHorizontal: 35,
+    paddingTop: 35,
+    paddingBottom: 15,
     alignItems: 'center',
     shadowColor: '#000',
     shadowOffset: {
@@ -32,20 +33,19 @@ const styles = StyleSheet.create({
     shadowRadius: 3.84,
     elevation: 5
   },
-  openButton: {
-    backgroundColor: '#F194FF',
-    borderRadius: 20,
-    padding: 10,
-    elevation: 2
-  },
-  textStyle: {
-    color: 'white',
-    fontWeight: 'bold',
+  centerText: {
     textAlign: 'center'
   },
-  modalText: {
+  title: {
+    fontSize: 26,
+    marginBottom: 15
+  },
+  subTitle: {
+    fontSize: 18,
+  },
+  deckName: {
+    marginTop: 20,
     marginBottom: 15,
-    textAlign: 'center'
   }
 })
 
@@ -67,21 +67,19 @@ function ConfirmDeleteDeckModal({ deckName, isVisible, setIsVisible, popScreen }
     >
       <View style={styles.centeredView}>
         <View style={styles.modalView}>
-          <Text style={styles.modalText}>Delete {deckName}?</Text>
+          <Text style={[styles.centerText, styles.title]}>Are you sure?</Text>
+          <Text style={[styles.centerText, styles.subTitle]}>The following card will be deleted:</Text>
+          <Text style={[styles.centerText, styles.deckName]}>{deckName}</Text>
 
-          <Text style={styles.modalText}>This action cannot be undone</Text>
+          <AppButton
+            onPress={handleConfirmDeletePressed}
+            text='Delete'
+            colorCode='danger' />
 
-          <TouchableHighlight
-            style={{ ...styles.openButton }}
-            onPress={() => setIsVisible(false)}>
-            <Text style={styles.textStyle}>Cancel</Text>
-          </TouchableHighlight>
+          <AppButton
+            onPress={() => setIsVisible(false)}
+            text='Cancel' />
 
-          <TouchableHighlight
-            style={{ ...styles.openButton, backgroundColor: '#2196F3' }}
-            onPress={handleConfirmDeletePressed}>
-            <Text style={styles.textStyle}>Delete</Text>
-          </TouchableHighlight>
         </View>
       </View>
     </Modal>

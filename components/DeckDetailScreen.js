@@ -5,17 +5,29 @@ import AppButton from '../components/AppButton'
 import ConfirmDeleteDeckModal from '../components/ConfirmDeleteDeckModal'
 
 const styles = StyleSheet.create({
-  deckName: {
+  screen: {
+    flex: 1,
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
+  },
+  centerText: {
     textAlign: 'center',
+  },
+  deckName: {
+    fontSize: 30,
+    maxWidth: 340,
+    marginBottom: 40
   },
   numberOfCards: {
-    textAlign: 'center',
+    fontSize: 18
   },
   addCardsFirst: {
-    textAlign: 'center',
+    fontSize: 16
   },
   deleteDeck: {
-    textAlign: 'center',
+    fontSize: 17,
+    fontWeight: '700',
+    color: '#d32b39'
   }
 })
 
@@ -36,35 +48,38 @@ function DeckDetailScreen({ deck, navigation }) {
 
   let cardsText
   if (numberOfQuestions === 0)
-    cardsText = 'No cards'
+    cardsText = '0 cards'
   else if (numberOfQuestions === 1)
     cardsText = '1 card'
   else
     cardsText = `${numberOfQuestions} cards`
 
   return (
-    <View>
+    <View style={styles.screen}>
       <ConfirmDeleteDeckModal
         deckName={deck.name}
         isVisible={isDeleteModelVisible}
         setIsVisible={setIsDeleteModelVisible}
         popScreen={() => navigation.pop()} />
 
-      <Text style={styles.deckName}>{deck.name}</Text>
+      <View>
+        <Text style={[styles.centerText, styles.deckName]}>{deck.name}</Text>
+        <Text style={[styles.centerText, styles.numberOfCards]}>This deck has {cardsText}</Text>
+      </View>
 
-      <Text style={styles.numberOfCards}>{cardsText}</Text>
+      <View>
+        <AppButton
+          text='Start quiz'
+          onPress={() => navigation.push('Quiz', { deckName: deck.name })}
+          disabled={!anyQuestiobns} />
+        {
+          !anyQuestiobns && <Text style={[styles.centerText, styles.addCardsFirst]}>To start a quiz, add some cards first</Text>
+        }
+      </View>
 
-      <AppButton
-        text='Start quiz'
-        onPress={() => navigation.push('Quiz', { deckName: deck.name })}
-        disabled={!anyQuestiobns} />
-
-      {
-        !anyQuestiobns && <Text style={styles.addCardsFirst}>To start a quiz, add some cards first</Text>
-      }
 
       <TouchableWithoutFeedback onPress={() => setIsDeleteModelVisible(true)}>
-        <Text style={styles.deleteDeck}>Delete deck</Text>
+        <Text style={[styles.centerText, styles.deleteDeck]}>Delete deck</Text>
       </TouchableWithoutFeedback>
 
     </View>
