@@ -1,8 +1,65 @@
 import React, { useLayoutEffect, useState, useCallback, useEffect } from 'react'
 import { connect } from 'react-redux'
-import { View, Text } from 'react-native'
+import { View, Text, StyleSheet } from 'react-native'
 import AppButton from './AppButton'
 import { clearLocalNotificationAsync, setLocalNotificationAsync } from '../notifications/NotificationsService'
+
+const styles = StyleSheet.create({
+  quizPage: {
+    alignContent: 'center',
+  },
+  progressIndicator: {
+    textAlign: 'center',
+    fontSize: 18,
+    marginTop: 40,
+    marginBottom: 60,
+    color: '#555',
+    fontWeight: '600'
+  },
+  questionText: {
+    textAlign: 'center',
+    fontSize: 20,
+    fontWeight: '700'
+  },
+  correctAnswerText: {
+    textAlign: 'center',
+    fontSize: 18,
+    alignSelf: 'center',
+    marginVertical: 30
+  },
+  answerText: {
+    textAlign: 'center',
+    fontSize: 20,
+    fontWeight: '700',
+  },
+
+  didAnswerCorrectly: {
+    textAlign: 'center',
+    fontSize: 18,
+    marginBottom: 10
+  },
+  buttons: {
+    marginTop: 100
+  },
+  showAnswerButtonWrap: {
+    marginTop: 60
+  },
+
+  scoreTitle: {
+    textAlign: 'center',
+    fontSize: 30,
+    fontWeight: '700',
+    marginTop: 80
+  },
+  scoreResult: {
+    textAlign: 'center',
+    alignSelf: 'center',
+    fontSize: 20,
+    marginTop: 70,
+    width: 200,
+    marginBottom: 60
+  },
+})
 
 function QuizScreen({ deck, navigation }) {
   useEffect(() => {
@@ -45,29 +102,37 @@ function QuizScreen({ deck, navigation }) {
   if (showFinalScore)
     return (
       <View>
-        <Text>Score</Text>
-        <Text>{numberOfCorrectAnswers} correct answers out of {deck.questions.length}</Text>
+        <Text style={styles.scoreTitle}>The quiz is over!</Text>
+        <Text style={styles.scoreResult}>You answered {numberOfCorrectAnswers} of {deck.questions.length} questions correctly.</Text>
         <AppButton text='Repeat quiz' onPress={handleRepeatQuizPressed} />
         <AppButton text='Go back to deck' onPress={() => navigation.pop()} />
       </View>
     )
   else
     return (
-      <View>
-        <Text>Question {questionIndex + 1} of {deck.questions.length}</Text>
-        <Text>{question.question}</Text>
+      <View style={styles.quizPage}>
+
+        <Text style={styles.progressIndicator}>The question {questionIndex + 1} /{deck.questions.length}</Text>
+        <Text style={styles.questionText}>{question.question}</Text>
 
         {
           showAnswer
             ? (
-              <View>
-                <Text>{question.answer}</Text>
-                <Text>Did you answer correctly?</Text>
-                <AppButton text='Yes' onPress={() => handleAnswerPressed(true)} />
-                <AppButton text='No' onPress={() => handleAnswerPressed(false)} />
-              </View>
+              <>
+                <Text style={styles.correctAnswerText}>The correct answer is:</Text>
+                <Text style={styles.answerText}>{question.answer}</Text>
+                <View style={styles.buttons}>
+                  <Text style={styles.didAnswerCorrectly}>Did you answer correctly?</Text>
+
+                  <AppButton text='Yes' onPress={() => handleAnswerPressed(true)} />
+                  <AppButton text='No' colorCode='danger' onPress={() => handleAnswerPressed(false)} />
+                </View>
+              </>
+
             ) : (
-              <AppButton text='Show answer' onPress={() => setShowAnswer(true)} />
+              <View style={styles.showAnswerButtonWrap}>
+                <AppButton text='Show answer' onPress={() => setShowAnswer(true)} />
+              </View>
             )
         }
 
