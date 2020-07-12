@@ -65,7 +65,7 @@ The project has been created from scratch using [Create React Native App and Exp
 ## Screenshots
 
 ### Mobile Flashcards app with no decks
-![Mobile Flashcards app with no decks](screenshots/empty-deck-detail.jpg)
+![Mobile Flashcards app with no decks](screenshots/empty-decks-list.jpg)
 
 ### Taking a quiz (1)
 ![Taking a quiz (1)](screenshots/quiz-1.jpg)
@@ -85,6 +85,9 @@ The project has been created from scratch using [Create React Native App and Exp
 ### Adding a deck (with error handling)
 ![Adding a deck (with error handling)](screenshots/add-deck-error.jpg)
 
+### Inside an empty deck
+![Inside an empty deck](screenshots/empty-deck-detail.jpg)
+
 ### Inside a deck
 ![Inside a deck](screenshots/deck-detail.jpg)
 
@@ -93,9 +96,6 @@ The project has been created from scratch using [Create React Native App and Exp
 
 ### Deleting a deck
 ![Deleting a deck](screenshots/delete-deck-modal.jpg)
-
-### Mobile Flashcards app with no decks
-![Mobile Flashcards app with no decks](screenshots/empty-decks-list.jpg)
 
 ### A generated local notification
 ![A generated local notification](screenshots/notification.jpg)
